@@ -1,3 +1,72 @@
-body {
-    color: pink;
+:root {
+    --white: #fefefe;
+    --main-blue: #1079be;
+    --light-blue: #b4daf3;
+    --medium-gray: #dddddd;
+    --dark-gray: #2c3e50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Lato', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+main {
+    background-color: var(--white);
+}
+
+header {
+    display: flex;
+    padding: 1.8rem 3.4rem;
+    background-color: var(--main-blue);
+    color: white;
+    font-size: 2.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+section {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 2rem 3.4rem;
+    font-size: 1.3rem;
+    max-width: 350px;
+    height: calc(100vh - 60px);
+    background-color: var(--medium-gray);
+    gap: 6rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+nav > a {
+    padding: 0 1.5rem;
+}
+
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projects-header > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    /* background-color: var(--medium-gray); */
 }
