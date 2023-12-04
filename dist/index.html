@@ -5,14 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>Hello!</header>
+    <header>To Do It!</header>
     <main>
-        <div class = "content"></div>
+        <section class = 'sidebar'>
+            
+            <nav class = 'sidebar-nav'>
+                Inbox
+                <a class = 'link-all-tasks' href = '#'>All Tasks</a>
+                <a class = 'link-all-tasks' href = '#'>Today</a>
+                <a class = 'link-all-tasks' href = '#'>This Week</a>
+                <a class = 'link-all-tasks' href = '#'>Completed</a>
+            </nav>
+
+            <div class = 'sidebar-projects'>
+                <div class = 'projects-header'>
+                    Projects
+                    <button>+</button>
+                </div>
+            </div>
+        </section>
+
     </main>
     
-    <footer>Made by Wolflington</footer>
     <script src = 'main.js'></script>
 </body>
 </html>
