@@ -13,43 +13,60 @@
     font-family: 'Roboto', 'Lato', sans-serif;
 }
 
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 main {
+    display: grid;
+    grid-template-columns: 0.5fr 1.5fr;
     background-color: var(--white);
 }
 
 header {
-    display: flex;
-    padding: 1.8rem 3.4rem;
+    padding: 1.8rem 2.5rem;
     background-color: var(--main-blue);
     color: white;
     font-size: 2.5rem;
     font-family: 'Bebas Neue', sans-serif;
 }
 
-section {
+.sidebar {
     display: flex;
-    flex: 1;
     flex-direction: column;
-    padding: 2rem 3.4rem;
+    padding: 3rem 2rem;
     font-size: 1.3rem;
     max-width: 350px;
-    height: calc(100vh - 60px);
+    height: 100vh;
     background-color: var(--medium-gray);
-    gap: 6rem;
+    gap: 4rem;
 }
 
-nav {
+.sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
 
+nav > p {
+    padding-bottom: 0.8rem;
+}
+
 nav > a {
     padding: 0 1.5rem;
+}
+
+.sidebar-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .projects-header {
@@ -68,5 +85,9 @@ nav > a {
     font-weight: 800;
     border: none;
     cursor: pointer;
-    /* background-color: var(--medium-gray); */
+    /* background-color: var(--medium-gray); */ 
+}
+
+.project-preview {
+    padding: 3rem 20px;
 }
