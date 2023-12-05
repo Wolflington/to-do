@@ -91,3 +91,21 @@ nav > a {
 .project-preview {
     padding: 3rem 20px;
 }
+
+h1 {
+    font-size: 1.8rem;
+}
+
+.add-task-btn {
+    margin-top: 0.8rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 5px 8px;
+    font-size: 1rem;
+}
+.add-task-btn > p {
+    font-weight: 800;
+}
