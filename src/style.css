@@ -14,9 +14,10 @@
 }
 
 body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    min-height: 100vh;
-    overflow: hidden;
 }
 
 a {
@@ -25,6 +26,7 @@ a {
 }
 
 main {
+    flex: 1;
     display: grid;
     grid-template-columns: 0.5fr 1.5fr;
     background-color: var(--white);
@@ -44,9 +46,10 @@ header {
     padding: 3rem 2rem;
     font-size: 1.3rem;
     max-width: 350px;
-    height: 100vh;
+    min-height: 0;
     background-color: var(--medium-gray);
     gap: 4rem;
+    overflow-y: auto;
 }
 
 .sidebar-nav {
@@ -108,4 +111,8 @@ h1 {
 }
 .add-task-btn > p {
     font-weight: 800;
+}
+
+.hidden {
+    display: none;
 }
