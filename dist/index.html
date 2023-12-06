@@ -41,6 +41,32 @@
 
     </main>
     
+    <section class = 'modal hidden'>
+        <form id = 'tasks-form' name = 'tasks-form'>
+            <div class = 'modal-head'>
+                <h2>Add new task</h2>
+                <button>X</button>
+            </div>
+    
+            <label for = 'title'>Task</label>
+            <input type = 'text' id = 'title' placeholder = 'e.g. Buy grocery' required>
+            
+            <label for = 'description'></label>
+            <input type = 'text' id = 'description' placeholder = 'Additional details'>
+    
+            <label for = 'due-date'>Due</label>
+            <input type = 'date' id = 'due-date' required>
+    
+            <label for = 'priority'>Priority</label>
+            <select id = 'priority' name = 'priority'>
+                <option value disabled selected>Select priority level</option>
+                <option value = 'low'>Low</option>
+                <option value = 'medium'>Medium</option>
+                <option value = 'High'>High</option>
+            </select>
+        </form>
+    </section>
+
     <script src = 'main.js'></script>
 </body>
 </html>
