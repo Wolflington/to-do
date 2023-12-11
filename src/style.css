@@ -46,10 +46,8 @@ header {
     padding: 3rem 2rem;
     font-size: 1.3rem;
     max-width: 350px;
-    min-height: 0;
     background-color: var(--medium-gray);
     gap: 4rem;
-    overflow-y: auto;
 }
 
 .sidebar-nav {
@@ -111,6 +109,33 @@ h1 {
 }
 .add-task-btn > p {
     font-weight: 800;
+}
+
+.modal {
+    min-width: 500px;
+    min-height: 400px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2.1rem;
+    border-radius: 25px;
+    gap: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.modal-head {
+    display: flex;
+    justify-content: space-between;
+}
+
+#tasks-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .hidden {
