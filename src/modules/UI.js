@@ -1,10 +1,5 @@
 import { toDoProperties, createToDo } from './tasks';
 
-//Create a function that when 'Add task' button 
-//is clicked, a form will appear and get that value. 
-//The value taken should become the respective 
-//properties of a to-do task..
-
 export function displayToDo() {
     const getToDoFunction = createToDo();
     //Manually print added tasks on the website
@@ -18,7 +13,9 @@ export function displayToDo() {
 
     //Factory function to print the properties on the page
     const printTasks = () => {
-        tasksList.innerHTML = ''; //Ensures that the previously added task is not duplicated for the next tasks that will be added
+        tasksList.innerHTML = ''; //Ensures that the previously added 
+        //task is not duplicated for the 
+        //next tasks that will be added
 
         //FOR EACH getToDo's parameter (book and index)
         getList.forEach((task, index) => {
@@ -84,3 +81,21 @@ tasksForm.addEventListener('submit', function(e) {
     displayToDoObj.clearInput();
 
 });
+
+const openModal = () => {
+    modal.classList.remove('hidden');
+}
+
+const closeModal = () => {
+    modal.classList.add('hidden');
+}
+
+const modal = document.querySelector('.modal');
+const addTaskBtn = document.querySelector('.add-task-btn');
+const closeBtn = document.querySelector('.close-btn');
+const submitBtn = document.getElementById('submit');
+
+//Event listeners
+addTaskBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+submitBtn.addEventListener('click', closeModal);
