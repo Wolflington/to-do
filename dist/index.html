@@ -42,16 +42,15 @@
     </main>
     
     <section class = 'modal hidden'>
-        <form id = 'tasks-form' name = 'tasks-form'>
-            <div class = 'modal-head'>
-                <h2>Add new task</h2>
-                <button>X</button>
-            </div>
-    
+        <div class = 'modal-head'>
+            <h2>Add new task</h2>
+            <button class = 'close-btn'>X</button>
+        </div>
+        <form id = 'tasks-form' name = 'tasks-form'>    
             <label for = 'title'>Task</label>
             <input type = 'text' id = 'title' placeholder = 'e.g. Buy grocery' required>
             
-            <label for = 'description'></label>
+            <label for = 'description'>Description</label>
             <input type = 'text' id = 'description' placeholder = 'Additional details'>
     
             <label for = 'due-date'>Due</label>
@@ -64,6 +63,8 @@
                 <option value = 'medium'>Medium</option>
                 <option value = 'High'>High</option>
             </select>
+
+            <input type = 'submit' id = 'submit' value = 'Add Task'>
         </form>
     </section>
 
