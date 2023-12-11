@@ -1,4 +1,4 @@
-import { createToDo } from './tasks';
+import { toDoProperties, createToDo } from './tasks';
 
 //Create a function that when 'Add task' button 
 //is clicked, a form will appear and get that value. 
@@ -7,6 +7,9 @@ import { createToDo } from './tasks';
 
 export function displayToDo() {
     const getToDoFunction = createToDo();
+    //Manually print added tasks on the website
+    //Delete this later and move it to another function that
+    //gets the input from the form
     getToDoFunction.addToDo('Title from UI', 'Description from UI', 'Due Date from UI', 'Priority from UI', false);
     const getList = getToDoFunction.getToDo();
     console.log(getList);
@@ -25,6 +28,7 @@ export function displayToDo() {
             <p>${task.description}</p>
             <p>${task.dueDate}</p>
             <p>${task.priority}</p>
+            <p>${task.completed}</p>
             `;
 
             //CREATE ELEMENT div 
@@ -38,5 +42,10 @@ export function displayToDo() {
         });
     }
 
+    const addTasks = () => {
+
+    }
+
     return { printTasks };
 }
+
