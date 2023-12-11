@@ -18,6 +18,8 @@ export function displayToDo() {
 
     //Factory function to print the properties on the page
     const printTasks = () => {
+        tasksList.innerHTML = ''; //Ensures that the previously added task is not duplicated for the next tasks that will be added
+
         //FOR EACH getToDo's parameter (book and index)
         getList.forEach((task, index) => {
             //Create VAR tasksInfo and set the value to print the text with HTML tags inside `` quotes
@@ -80,4 +82,5 @@ tasksForm.addEventListener('submit', function(e) {
     displayToDoObj.addTasks(task);
     displayToDoObj.printTasks();
     displayToDoObj.clearInput();
+
 });
