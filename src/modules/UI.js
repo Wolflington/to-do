@@ -2,12 +2,7 @@ import { toDoProperties, createToDo } from './tasks';
 
 export function displayToDo() {
     const getToDoFunction = createToDo();
-    //Manually print added tasks on the website
-    //Delete this later and move it to another function that
-    //gets the input from the form
-    // getToDoFunction.addToDo('Title from UI', 'Description from UI', 'Due Date from UI', 'Priority from UI', false);
     const getList = getToDoFunction.getToDo();
-    console.log(getList);
 
     let tasksList = document.querySelector('.tasks-list');
 
@@ -19,22 +14,32 @@ export function displayToDo() {
 
         //FOR EACH getToDo's parameter (book and index)
         getList.forEach((task, index) => {
-            //Create VAR tasksInfo and set the value to print the text with HTML tags inside `` quotes
-            let tasksInfo = 
-            `
-            <p>${task.title}</p>
-            <p>${task.description}</p>
-            <p>${task.dueDate}</p>
-            <p>${task.priority}</p>
-            <p>${task.completed}</p>
-            `;
-
             //CREATE ELEMENT div 
             const tasksItem = document.createElement('div');
             //ADD CLASS to the created div
-            tasksItem.classList.add('tasks-item')
-            //Set innerHTML of created div to tasksInfo
-            tasksItem.innerHTML = tasksInfo;
+            tasksItem.classList.add('tasks-item');
+
+            // Create paragraphs for each task property
+            const taskTitle = document.createElement('p');
+            taskTitle.textContent = task.title;
+            tasksItem.appendChild(taskTitle);
+
+            const taskDescription = document.createElement('p');
+            taskDescription.textContent = task.description;
+            tasksItem.appendChild(taskDescription);
+
+            const taskDueDate = document.createElement('p');
+            taskDueDate.textContent = task.dueDate;
+            tasksItem.appendChild(taskDueDate);
+
+            const taskPriority = document.createElement('p');
+            taskPriority.textContent = task.priority;
+            tasksItem.appendChild(taskPriority);
+
+            const taskCompleted = document.createElement('p');
+            taskCompleted.textContent = task.completed;
+            tasksItem.appendChild(taskCompleted);
+
             //Append tasksInfo to the tasksList
             tasksList.append(tasksItem);
         });
