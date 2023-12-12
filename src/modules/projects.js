@@ -5,23 +5,37 @@ function projectProperties(projectTitle) {
 
 //Create a function that adds project tabs
 export function createProjectTabs() {
-    //Create <a> elements
-    const projects = document.createElement('a');
-    projects.classList.add('projects');
+    let projectList = []; //Empty array where projects will be pushed later on
 
-    //Append to project lists
-    const projectsList = document.querySelector(".projects-list");
-    projectsList.append(projects);
+    const getProjectList = () => {
+        return projectList;
+    }
 
-    console.log('I am clicked from event listener in projects.js')
+    return { printProjects, getProjectList };
 }
 
-//Create a function that displays an input (text) to name the project
+function displayProjects() {
+    //Get the array for projects list
+    const getProjects = createProjectTabs();
+    const getProjList = getProjects.getProjectList();
 
-// //Create a function that changes tab
-function changeTabs(currentButton) {
+    const printProjects = () => {
+        const projectsList = document.querySelector('.projects-list');
+        projectsList.innerHTML = '';
 
+        getProjList.forEach((project, index) => {
+            //Create <a> elements
+            const projects = document.createElement('a');
+            projects.classList.add('projects');
+            projects.textContent = project.name
+
+            //Append to project lists
+            const projectsList = document.querySelector(".projects-list");
+            projectsList.append(projects);
+        });
+    }
 }
+
 
 //Create event listeners for adding projects with add project button
 const projectsBtn = document.querySelector('.add-project-btn');
