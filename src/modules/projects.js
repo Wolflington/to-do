@@ -11,7 +11,12 @@ export function createProjectTabs() {
         return projectList;
     }
 
-    return { printProjects, getProjectList };
+    const addProjects = (projectTitle) => {
+        let newProject = projectProperties(projectTitle);
+        projectList.push(newProject);
+    }
+    console.log('I am clicked from projects.js!');
+    return { getProjectList, addProjects };
 }
 
 function displayProjects() {
@@ -27,16 +32,36 @@ function displayProjects() {
             //Create <a> elements
             const projects = document.createElement('a');
             projects.classList.add('projects');
-            projects.textContent = project.name
+            projects.textContent = project.projectTitle
 
             //Append to project lists
             const projectsList = document.querySelector(".projects-list");
             projectsList.append(projects);
         });
     }
+
+    //Create a method that pushes project into array
+    const addProj = (project) => {
+        getProjList.push(project);
+    }
+
+    return { printProjects, addProj }
 }
 
+const openProjectModal = () => {
+    projectModal.classList.remove('hidden');
+}
 
-//Create event listeners for adding projects with add project button
+const closeProjectModal = () => {
+    projectModal.classList.add('hidden');
+}
+
+const projectModal = document.querySelector('.project-modal');
 const projectsBtn = document.querySelector('.add-project-btn');
-projectsBtn.addEventListener('click', createProjectTabs);
+const closeProjBtn = document.querySelector('.cancel-project');
+const submitProjBtn = document.getElementById('submit-project');
+
+//Create an event listener to make the form to get project names appear under Projects
+projectsBtn.addEventListener('click', openProjectModal);
+closeProjBtn.addEventListener('click', closeProjectModal);
+submitProjBtn.addEventListener('click', closeProjectModal);
