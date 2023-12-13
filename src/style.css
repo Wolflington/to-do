@@ -138,6 +138,16 @@ h1 {
     gap: 10px;
 }
 
+.project-modal {
+    display: flex;
+    flex-direction: column;
+}
+
+.projects-list {
+    display: flex;
+    flex-direction: column;
+}
+
 .hidden {
     display: none;
 }
