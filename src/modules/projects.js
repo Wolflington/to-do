@@ -1,3 +1,5 @@
+import { create } from "lodash";
+
 //Create a factory function similar to a Class constructor for projects
 function projectProperties(projectTitle) {
     return { projectTitle }
@@ -23,14 +25,14 @@ function displayProjects() {
     //Get the array for projects list
     const getProjects = createProjectTabs();
     const getProjList = getProjects.getProjectList();
+    const projectsList = document.querySelector('.projects-list');
 
     const printProjects = () => {
-        const projectsList = document.querySelector('.projects-list');
         projectsList.innerHTML = '';
 
         getProjList.forEach((project, index) => {
             //Create <a> elements
-            const projects = document.createElement('a');
+            const projects = document.createElement('p');
             projects.classList.add('projects');
             projects.textContent = project.projectTitle
 
@@ -41,12 +43,42 @@ function displayProjects() {
     }
 
     //Create a method that pushes project into array
-    const addProj = (project) => {
-        getProjList.push(project);
+    const addProj = (projectTitle) => {
+        getProjList.push(projectTitle);
     }
 
-    return { printProjects, addProj }
+    const clearInput = () => {
+        document.getElementById('project-title').value = '';
+    }
+
+    return { printProjects, addProj, clearInput }
 }
+
+const displayProjectsObj = Object.create(displayProjects());
+
+//Event listener for adding projects
+const projectForm = document.getElementById('project-form');
+//Attach the form to an event listener
+projectForm.addEventListener('submit', function(e) {
+    //Default action should not be taken if the event is not explicitly handled
+    e.preventDefault();
+    //Get the value of the property
+    const projectTitle = document.getElementById('project-title').value;
+
+    //Create a new projectProperties instance
+    const newCreateProject = createProjectTabs();
+    let getProjList = newCreateProject.getProjectList();
+    const project = projectProperties(projectTitle)
+    //Push the new instance into addProjects
+
+    displayProjectsObj.addProj(project);
+    displayProjectsObj.printProjects();
+    displayProjectsObj.clearInput();
+
+});
+
+
+//Move this later to UI.js and import it in this module
 
 const openProjectModal = () => {
     projectModal.classList.remove('hidden');
