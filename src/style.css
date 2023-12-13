@@ -20,11 +20,6 @@ body {
     margin: 0;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
 main {
     flex: 1;
     display: grid;
@@ -57,11 +52,8 @@ header {
 }
 
 nav > p {
-    padding-bottom: 0.8rem;
-}
-
-nav > a {
-    padding: 0 1.5rem;
+    padding-left: 25px;
+    cursor: pointer;
 }
 
 .sidebar-projects {
@@ -146,6 +138,11 @@ h1 {
 .projects-list {
     display: flex;
     flex-direction: column;
+}
+
+.projects-list > p {
+    padding-left: 25px;
+    cursor: pointer;
 }
 
 .hidden {
