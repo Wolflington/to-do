@@ -41,6 +41,12 @@ export function storeTasks() {
     const dueDate = document.getElementById('due-date').value;
     const priority = document.getElementById('priority').value;
 
+    //localStorage methods to store the data into local storage so the input from the user will not be removed after refreshing the page
+    localStorage.setItem('Task', document.getElementById('title').value);
+    localStorage.setItem('Description', document.getElementById('description').value);
+    localStorage.setItem('Due date', document.getElementById('due-date').value);
+    localStorage.setItem('Priority', document.getElementById('priority').value);
+
     //Create new toDoProperties instance (similar to creating a new constructor)
     const getToDoFunction = createToDo();
     let getList = getToDoFunction.getToDo();
@@ -50,4 +56,6 @@ export function storeTasks() {
     displayToDoObj.addTasks(task);
     displayToDoObj.printTasks();
     displayToDoObj.clearInput();
+
 }
+
