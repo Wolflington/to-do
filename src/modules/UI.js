@@ -1,5 +1,9 @@
 import { toDoProperties, createToDo } from './tasks';
 
+//START OF ADDING TO-DOS
+
+
+
 export function displayToDo() {
     const getToDoFunction = createToDo();
     const getList = getToDoFunction.getToDo();
@@ -75,7 +79,7 @@ tasksForm.addEventListener('submit', function(e) {
     const dueDate = document.getElementById('due-date').value;
     const priority = document.getElementById('priority').value;
 
-    //Create new addToDo instance (similar to creating a new constructor)
+    //Create new toDoProperties instance (similar to creating a new constructor)
     const getToDoFunction = createToDo();
     let getList = getToDoFunction.getToDo();
     const task = toDoProperties(title, description, dueDate, priority);
@@ -104,3 +108,100 @@ const submitBtn = document.getElementById('submit');
 addTaskBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 submitBtn.addEventListener('click', closeModal);
+
+
+
+//END OF ADDING TO-DOS
+
+function changeTabs(currentButton) {
+    const section = document.querySelector('section');
+    const paraBtns = section.querySelectorAll('p'); //Paragraph buttons
+    
+    //Removes 'active' class to every paragraph buttons
+    paraBtns.forEach((btn) => {
+        btn.classList.remove('active');
+    }); 
+
+    //If currentButton is passed down to an existing DOM element, 
+    //then class name "active" will be added to that element
+    if (currentButton) {
+        currentButton.classList.add('active');
+    } 
+}
+
+export function changeTabContent() {
+    //DOM elements
+    const allTasks = document.querySelector('.link-all-tasks');
+    const today = document.querySelector('.link-today');
+    const thisWeek = document.querySelector('.link-week');
+    const completed = document.querySelector('.link-completed');
+
+    //Call changeTab with 'All Tasks' as parameter to initially load 'All Tasks' upon loading the website
+    changeTabs(allTasks);
+
+    //Create event listener for 'All Tasks' tab
+    allTasks.addEventListener('click', () => {
+        //Call changeTabs and pass 'All Tasks' DOM element
+        changeTabs(allTasks);
+        //Load the content of 'All Tasks' tab
+        allTasksContent();
+    });
+
+    //Create event listener for 'Today' tab
+    today.addEventListener('click', () => {
+        //Call changeTabs and pass 'Today' DOM element
+        changeTabs(today);
+        //Load the content of 'Today' tab
+        todayContent();
+    });
+
+    //Create event listener for 'This Week' tab
+    thisWeek.addEventListener('click', () => {
+        //Call changeTabs and pass 'This Week' DOM element
+        changeTabs(thisWeek);
+        //Load the content of 'This Week' tab
+        thisWeekContent();
+    })
+        
+    //Create event listener for 'Completed' tab
+    completed.addEventListener('click', () => {
+        //Call changeTabs and pass 'Completed' DOM element
+        changeTabs(completed);
+        //Load the content of 'Completed' tab
+        completedContent();
+    });
+        
+    //Create event listener for 'Projects' tab
+        //Call changeTabs and pass 'project' (individual projects) DOM element
+        //Load the content of (individual) 'project' tab
+}
+
+changeTabContent();
+
+function allTasksContent() {
+    const tasksList = document.querySelector('.tasks-list');
+    const tabName = document.querySelector('.tab-name');
+    tabName.textContent = 'Inbox';
+    tasksList.textContent = 'I am from all tasks function!';
+}
+
+function todayContent() {
+    const tasksList = document.querySelector('.tasks-list');
+    const tabName = document.querySelector('.tab-name');
+    tabName.textContent = 'Today';
+    tasksList.textContent = 'I am from today content function!';
+}
+
+function thisWeekContent() {
+    const tasksList = document.querySelector('.tasks-list');
+    const tabName = document.querySelector('.tab-name');
+    tabName.textContent = 'This Week';
+    tasksList.textContent = 'I am from this week content function!';
+}
+
+function completedContent() {
+    const tasksList = document.querySelector('.tasks-list');
+    const tabName = document.querySelector('.tab-name');
+    tabName.textContent = 'Completed';
+    tasksList.textContent = 'I am from completed content function!';
+}
