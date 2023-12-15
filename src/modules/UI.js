@@ -1,4 +1,4 @@
-import { toDoProperties, createToDo } from './tasks';
+import { storeTasks, createToDo } from './tasks';
 
 //START OF ADDING TO-DOS
 
@@ -65,30 +65,13 @@ export function displayToDo() {
     return { printTasks, addTasks, clearInput };
 }
 
-const displayToDoObj = Object.create(displayToDo());
 
-//Event listener for adding tasks
-//Get the form DOM
+
+//Event listener for adding tasks once the form is submitted
 const tasksForm = document.getElementById('tasks-form');
-//Attach the form to an event listener
 tasksForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    //GET the value received from the form
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const dueDate = document.getElementById('due-date').value;
-    const priority = document.getElementById('priority').value;
-
-    //Create new toDoProperties instance (similar to creating a new constructor)
-    const getToDoFunction = createToDo();
-    let getList = getToDoFunction.getToDo();
-    const task = toDoProperties(title, description, dueDate, priority);
-    
-    //Push the new instance into addTasks
-    displayToDoObj.addTasks(task);
-    displayToDoObj.printTasks();
-    displayToDoObj.clearInput();
-
+    e.preventDefault(); //Ensures that the default action of the form will not execute
+    storeTasks();
 });
 
 const openTaskModal = () => {
@@ -117,11 +100,12 @@ const projectsBtn = document.querySelector('.add-project-btn');
 const closeProjBtn = document.querySelector('.cancel-project');
 const submitProjBtn = document.getElementById('submit-project');
 
-//Event listeners
+//Event listeners for opening/closing task modal
 addTaskBtn.addEventListener('click', openTaskModal);
 closeBtn.addEventListener('click', closeTaskModal);
 submitBtn.addEventListener('click', closeTaskModal);
 
+//For opening/closing project input
 projectsBtn.addEventListener('click', openProjectModal);
 closeProjBtn.addEventListener('click', closeProjectModal);
 submitProjBtn.addEventListener('click', closeProjectModal);

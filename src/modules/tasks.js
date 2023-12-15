@@ -1,20 +1,26 @@
-export function toDoProperties (title, description, dueDate, priority, completed = false) {
+import{ displayToDo } from './UI';
+
+export function toDoProperties (
+    title, 
+    description, 
+    dueDate, 
+    priority, 
+    completed = false) 
+    {
     return { title, description, dueDate, priority, completed }
 } //Factory function for properties
 
 export function createToDo() {
     let toDoList = []; //Empty array where every tasks will be added
 
-    //Create a function to pass the title and push it into the array
+    //Set the respective info into an object then 
+    //push it into the array
     const addToDo = (title, description, dueDate, priority, completed) => {
         let newToDo = toDoProperties(title, description, dueDate, priority, completed);
-        let testNewToDo = toDoProperties('Buy This', 'Description here', '12/5/2023', 'High');
         toDoList.push(newToDo);
-        toDoList.push(testNewToDo);
-
     }
 
-    //Checks every index of toDoList array if it's completed
+    //Checks every index of toDoList array to see if it's completed
     const toggleComplete = (index) => {
         toDoList[index].completed = !toDoList[index].completed;
     }
@@ -24,4 +30,24 @@ export function createToDo() {
     }
 
     return { addToDo, toggleComplete, getToDo };
+}
+
+const displayToDoObj = Object.create(displayToDo());
+
+export function storeTasks() {
+    //GET the value received from the form
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const dueDate = document.getElementById('due-date').value;
+    const priority = document.getElementById('priority').value;
+
+    //Create new toDoProperties instance (similar to creating a new constructor)
+    const getToDoFunction = createToDo();
+    let getList = getToDoFunction.getToDo();
+    const task = toDoProperties(title, description, dueDate, priority);
+
+    //Push the new instance into addTasks
+    displayToDoObj.addTasks(task);
+    displayToDoObj.printTasks();
+    displayToDoObj.clearInput();
 }
