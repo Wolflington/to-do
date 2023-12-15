@@ -91,12 +91,20 @@ tasksForm.addEventListener('submit', function(e) {
 
 });
 
-const openModal = () => {
+const openTaskModal = () => {
     modal.classList.remove('hidden');
 }
 
-const closeModal = () => {
+const closeTaskModal = () => {
     modal.classList.add('hidden');
+}
+
+const openProjectModal = () => {
+    projectModal.classList.remove('hidden');
+}
+
+const closeProjectModal = () => {
+    projectModal.classList.add('hidden');
 }
 
 const modal = document.querySelector('.modal');
@@ -104,14 +112,31 @@ const addTaskBtn = document.querySelector('.add-task-btn');
 const closeBtn = document.querySelector('.close-btn');
 const submitBtn = document.getElementById('submit');
 
+const projectModal = document.querySelector('.project-modal');
+const projectsBtn = document.querySelector('.add-project-btn');
+const closeProjBtn = document.querySelector('.cancel-project');
+const submitProjBtn = document.getElementById('submit-project');
+
 //Event listeners
-addTaskBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
-submitBtn.addEventListener('click', closeModal);
+addTaskBtn.addEventListener('click', openTaskModal);
+closeBtn.addEventListener('click', closeTaskModal);
+submitBtn.addEventListener('click', closeTaskModal);
+
+projectsBtn.addEventListener('click', openProjectModal);
+closeProjBtn.addEventListener('click', closeProjectModal);
+submitProjBtn.addEventListener('click', closeProjectModal);
 
 
 
 //END OF ADDING TO-DOS
+
+
+
+
+
+//START OF CHANGING TABS AND TAB CONTENT
+
+
 
 function changeTabs(currentButton) {
     const section = document.querySelector('section');
@@ -176,9 +201,7 @@ export function changeTabContent() {
         //Load the content of (individual) 'project' tab
 }
 
-changeTabContent();
-
-function allTasksContent() {
+export function allTasksContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
     tabName.textContent = 'Inbox';

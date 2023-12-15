@@ -1,5 +1,3 @@
-import { create } from "lodash";
-
 //Create a factory function similar to a Class constructor for projects
 function projectProperties(projectTitle) {
     return { projectTitle }
@@ -76,24 +74,3 @@ projectForm.addEventListener('submit', function(e) {
     displayProjectsObj.clearInput();
 
 });
-
-
-//Move this later to UI.js and import it in this module
-
-const openProjectModal = () => {
-    projectModal.classList.remove('hidden');
-}
-
-const closeProjectModal = () => {
-    projectModal.classList.add('hidden');
-}
-
-const projectModal = document.querySelector('.project-modal');
-const projectsBtn = document.querySelector('.add-project-btn');
-const closeProjBtn = document.querySelector('.cancel-project');
-const submitProjBtn = document.getElementById('submit-project');
-
-//Create an event listener to make the form to get project names appear under Projects
-projectsBtn.addEventListener('click', openProjectModal);
-closeProjBtn.addEventListener('click', closeProjectModal);
-submitProjBtn.addEventListener('click', closeProjectModal);
