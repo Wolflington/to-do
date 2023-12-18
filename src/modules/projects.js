@@ -5,19 +5,24 @@ function projectProperties(projectTitle) {
 
 //Create a function that adds project tabs
 export function createProjectTabs() {
-    let projectList = []; //Empty array where projects will be pushed later on
+    let projectList = JSON.parse(localStorage.getItem('toDoList')) || []; //Retrieves 'toDoList' key then parses it from JSON array into JavaScript array. 
 
     const getProjectList = () => {
         return projectList;
     }
 
-    const addProjects = (projectTitle) => {
-        let newProject = projectProperties(projectTitle);
+    function addProjects(projectTitle) {
+        let newProject = { projectTitle };
         projectList.push(newProject);
+        localStorage.setItem('toDoList', JSON.stringify(projectList));
     }
-    console.log('I am clicked from projects.js!');
+    
+    console.log(projectList);
     return { getProjectList, addProjects };
 }
+
+const test = createProjectTabs();
+test.addProjects('Inbox');
 
 function displayProjects() {
     //Get the array for projects list
@@ -29,7 +34,6 @@ function displayProjects() {
         projectsList.innerHTML = '';
 
         getProjList.forEach((project, index) => {
-            //Create <a> elements
             const projects = document.createElement('p');
             projects.classList.add('projects');
             projects.textContent = project.projectTitle
@@ -60,12 +64,12 @@ const projectForm = document.getElementById('project-form');
 projectForm.addEventListener('submit', function(e) {
     //Default action should not be taken if the event is not explicitly handled
     e.preventDefault();
-    //Get the value of the property
+    //Get the value of the property from input
     const projectTitle = document.getElementById('project-title').value;
 
     //Create a new projectProperties instance
-    const newCreateProject = createProjectTabs();
-    let getProjList = newCreateProject.getProjectList();
+    // const newCreateProject = createProjectTabs();
+    // let getProjList = newCreateProject.getProjectList();
     const project = projectProperties(projectTitle)
     //Push the new instance into addProjects
 
