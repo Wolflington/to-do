@@ -1,3 +1,5 @@
+import { createToDo } from './tasks';
+
 //Create a factory function similar to a Class constructor for projects
 function projectProperties(projectTitle) {
     return { projectTitle }
@@ -11,18 +13,21 @@ export function createProjectTabs() {
         return projectList;
     }
 
+    const getCreateToDo = createToDo();
+    const getList = getCreateToDo.getToDo;
+
     function addProjects(projectTitle) {
         let newProject = { projectTitle };
         projectList.push(newProject);
-        localStorage.setItem('toDoList', JSON.stringify(projectList));
+        // projectList.push(getList);
+        localStorage.setItem('toDoList', JSON.stringify(projectList)); //Converts the object into strings
     }
-    
-    console.log(projectList);
-    return { getProjectList, addProjects };
+
+    return { projectList, getProjectList, addProjects };
 }
 
-const test = createProjectTabs();
-test.addProjects('Inbox');
+// const test = createProjectTabs();
+// test.addProjects('Test!');
 
 function displayProjects() {
     //Get the array for projects list
@@ -36,7 +41,7 @@ function displayProjects() {
         getProjList.forEach((project, index) => {
             const projects = document.createElement('p');
             projects.classList.add('projects');
-            projects.textContent = project.projectTitle
+            projects.textContent = JSON.stringify(project);
 
             //Append to project lists
             const projectsList = document.querySelector(".projects-list");
@@ -47,6 +52,7 @@ function displayProjects() {
     //Create a method that pushes project into array
     const addProj = (projectTitle) => {
         getProjList.push(projectTitle);
+        console.log(getProjList);
     }
 
     const clearInput = () => {
@@ -66,6 +72,7 @@ projectForm.addEventListener('submit', function(e) {
     e.preventDefault();
     //Get the value of the property from input
     const projectTitle = document.getElementById('project-title').value;
+    const getProjects = createProjectTabs();
 
     //Create a new projectProperties instance
     // const newCreateProject = createProjectTabs();
@@ -76,5 +83,6 @@ projectForm.addEventListener('submit', function(e) {
     displayProjectsObj.addProj(project);
     displayProjectsObj.printProjects();
     displayProjectsObj.clearInput();
-
+    
+    getProjects.addProjects(projectTitle);
 });
