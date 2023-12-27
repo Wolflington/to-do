@@ -7,7 +7,6 @@ import { storeTasks, createToDo } from './tasks';
 export function displayToDo() {
     const getToDoFunction = createToDo();
     const getList = getToDoFunction.getToDo();
-
     let tasksList = document.querySelector('.tasks-list');
 
     //Factory function to print the properties on the page
@@ -48,10 +47,11 @@ export function displayToDo() {
             tasksList.append(tasksItem);
         });
     }
-
+    
     //Create a function that adds (pushes) the tasks into array
     const addTasks = (task) => {
         getList.push(task);
+        localStorage.setItem('tasks', JSON.stringify(getList));
     }
 
     //Clear input after submitting the form
@@ -65,14 +65,18 @@ export function displayToDo() {
     return { printTasks, addTasks, clearInput };
 }
 
-
-
 //Event listener for adding tasks once the form is submitted
 const tasksForm = document.getElementById('tasks-form');
 tasksForm.addEventListener('submit', function(e) {
     e.preventDefault(); //Ensures that the default action of the form will not execute
     storeTasks();
 });
+
+const getDisplayToDo = displayToDo();
+//Prints the to do tasks when loaded
+document.addEventListener('DOMContentLoaded', () => {
+    getDisplayToDo.printTasks();
+})
 
 const openTaskModal = () => {
     modal.classList.remove('hidden');
@@ -189,26 +193,26 @@ export function allTasksContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
     tabName.textContent = 'Inbox';
-    tasksList.textContent = 'I am from all tasks function!';
+    // tasksList.textContent = 'I am from all tasks function!';
 }
 
 function todayContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
     tabName.textContent = 'Today';
-    tasksList.textContent = 'I am from today content function!';
+    // tasksList.textContent = 'I am from today content function!';
 }
 
 function thisWeekContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
     tabName.textContent = 'This Week';
-    tasksList.textContent = 'I am from this week content function!';
+    // tasksList.textContent = 'I am from this week content function!';
 }
 
 function completedContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
     tabName.textContent = 'Completed';
-    tasksList.textContent = 'I am from completed content function!';
+    // tasksList.textContent = 'I am from completed content function!';
 }
