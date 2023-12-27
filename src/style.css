@@ -130,6 +130,12 @@ h1 {
     gap: 10px;
 }
 
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .project-modal {
     display: flex;
     flex-direction: column;
@@ -138,6 +144,8 @@ h1 {
 .projects-list {
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    word-wrap: break-word;
 }
 
 .projects-list > p {
