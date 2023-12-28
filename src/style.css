@@ -160,8 +160,9 @@ h1 {
     gap: 10px;
 }
 
-.projects::after {
-    content: url('./assets/icons8-trash-can.svg');
+.projects > img {
+    height: 25px;
+    width: 25px;
 }
 
 .hidden {

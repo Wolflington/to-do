@@ -1,7 +1,8 @@
 import { storeTasks, createToDo } from './tasks';
 import { projectProperties, createProjectTabs } from './projects';
+import Delete from '../assets/icons8-trash-can.svg';
 
-//START OF ADDING TO-DOS
+//START OF TO-DOS
 
 
 
@@ -28,9 +29,9 @@ export function displayToDo() {
             taskTitle.textContent = task.title;
             tasksItem.appendChild(taskTitle);
 
-            const taskDescription = document.createElement('p');
-            taskDescription.textContent = task.description;
-            tasksItem.appendChild(taskDescription);
+            // const taskDescription = document.createElement('p');
+            // taskDescription.textContent = task.description;
+            // tasksItem.appendChild(taskDescription);
 
             const taskDueDate = document.createElement('p');
             taskDueDate.textContent = task.dueDate;
@@ -117,11 +118,11 @@ submitProjBtn.addEventListener('click', closeProjectModal);
 
 
 
-//END OF ADDING TO-DOS
+//END OF TO-DOS
 
 
 
-//START OF ADDING PROJECT TABS
+//START OF PROJECT TABS
 
 
 
@@ -137,10 +138,14 @@ function displayProjects() {
         const projects = document.createElement('p');
         projects.classList.add('projects');
         projects.textContent = project.title;
+
+        const deleteIcon = new Image();
+        deleteIcon.src = Delete;
   
         // Append to project lists
         const projectsList = document.querySelector('.projects-list');
         projectsList.append(projects);
+        projects.append(deleteIcon);
       });
     };
   
@@ -180,8 +185,8 @@ function displayProjects() {
 
 
 
-//END OF ADDING PROJECT TABS
 
+//END OF PROJECT TABS
 
 
 
