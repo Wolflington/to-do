@@ -98,6 +98,7 @@ h1 {
     gap: 0.6rem;
     padding: 5px 8px;
     font-size: 1rem;
+    margin-bottom: 1rem;
 }
 .add-task-btn > p {
     font-weight: 800;
@@ -145,12 +146,22 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
+    overflow-wrap: anywhere;
+    overflow: visible;
 }
 
-.projects-list > p {
+.projects {
     padding-left: 25px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.projects::after {
+    content: url('./assets/icons8-trash-can.svg');
 }
 
 .hidden {
