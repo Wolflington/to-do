@@ -140,6 +140,8 @@ function displayProjects() {
         projects.textContent = project.title;
 
         const deleteIcon = new Image();
+        deleteIcon.classList.add('delete-icon');
+        deleteIcon.setAttribute('data-index', index);
         deleteIcon.src = Delete;
   
         // Append to project lists
@@ -158,30 +160,42 @@ function displayProjects() {
     const clearInput = () => {
       document.getElementById('project-title').value = '';
     };
+
+    const removeProject = (index) => {
+        getProjList.splice(index, 1);
+        localStorage.setItem('toDoList', JSON.stringify(getProjList));
+        printProjects(); // Update the DOM after removal
+      };
   
-    return { printProjects, addProj, clearInput };
+    return { printProjects, addProj, clearInput, removeProject };
   }
-  
-  const displayProjectsObj = Object.create(displayProjects());
-  const getProjects = createProjectTabs();
-  
-  //Ensure the projects are printed when the page loads
-  document.addEventListener('DOMContentLoaded', () => {
-    displayProjectsObj.printProjects();
-  });
-  
-  const projectForm = document.getElementById('project-form');
-  projectForm.addEventListener('submit', function (e) {
+
+const displayProjectsObj = Object.create(displayProjects());
+displayProjectsObj.printProjects();
+
+
+//Event listener for adding projects
+const projectForm = document.getElementById('project-form');
+projectForm.addEventListener('submit', function (e) {
+    const getProjects = Object.create(createProjectTabs());
     e.preventDefault();
     const projectTitle = document.getElementById('project-title').value;
-  
+
     const project = projectProperties(projectTitle);
     displayProjectsObj.addProj(project);
     displayProjectsObj.printProjects();
     displayProjectsObj.clearInput();
-  
-    getProjects.addProjects(projectTitle);
-  });
+});
+
+//Event Listener for deleting projects
+const projectListContainer = document.querySelector('.projects-list');
+projectListContainer.addEventListener('click', function (e) {
+    const getProjects = Object.create(createProjectTabs());
+    if (e.target.classList.contains('delete-icon')) {
+        const index = e.target.getAttribute('data-index');
+        displayProjectsObj.removeProject(index);
+    }
+});
 
 
 
