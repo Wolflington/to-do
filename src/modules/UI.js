@@ -33,20 +33,30 @@ export function displayToDo() {
             // taskDescription.textContent = task.description;
             // tasksItem.appendChild(taskDescription);
 
+            const dateAndPriorityDiv = document.createElement('div');
+            dateAndPriorityDiv.classList.add('date-priority-div');
+            const deleteIcon = new Image();
+            deleteIcon.src = Delete;
+            deleteIcon.classList.add('delete-icon');
+
             const taskDueDate = document.createElement('p');
             taskDueDate.textContent = task.dueDate;
             tasksItem.appendChild(taskDueDate);
+            dateAndPriorityDiv.appendChild(taskDueDate);
 
             const taskPriority = document.createElement('p');
             taskPriority.textContent = task.priority;
             tasksItem.appendChild(taskPriority);
+            dateAndPriorityDiv.appendChild(taskPriority);
 
-            const taskCompleted = document.createElement('p');
-            taskCompleted.textContent = task.completed;
-            tasksItem.appendChild(taskCompleted);
+            // const taskCompleted = document.createElement('p');
+            // taskCompleted.textContent = task.completed;
+            // tasksItem.appendChild(taskCompleted);
 
             //Append tasksInfo to the tasksList
             tasksList.append(tasksItem);
+            tasksItem.append(dateAndPriorityDiv);
+            dateAndPriorityDiv.append(deleteIcon);
         });
     }
     
@@ -64,7 +74,13 @@ export function displayToDo() {
         document.getElementById('priority').value = '';
     }
 
-    return { printTasks, addTasks, clearInput };
+    const removeTask = (index) => {
+        getList.splice(index, 1);
+        localStorage.setItem('toDoList', JSON.stringify(getList));
+        printTasks();
+    }
+
+    return { printTasks, addTasks, clearInput, removeTask };
 }
 
 //Event listener for adding tasks once the form is submitted
@@ -74,11 +90,10 @@ tasksForm.addEventListener('submit', function(e) {
     storeTasks();
 });
 
+//Prints the to do tasks when the page loads
 const getDisplayToDo = displayToDo();
-//Prints the to do tasks when loaded
-document.addEventListener('DOMContentLoaded', () => {
-    getDisplayToDo.printTasks();
-})
+getDisplayToDo.printTasks();
+
 
 const openTaskModal = () => {
     modal.classList.remove('hidden');
@@ -115,6 +130,15 @@ submitBtn.addEventListener('click', closeTaskModal);
 projectsBtn.addEventListener('click', openProjectModal);
 closeProjBtn.addEventListener('click', closeProjectModal);
 submitProjBtn.addEventListener('click', closeProjectModal);
+
+//Event listener for deleting tasks
+const tasksListContainer = document.querySelector('.tasks-list');
+tasksListContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('delete-icon')) {
+        const index = e.target.getAttribute('data-index');
+        getDisplayToDo.removeTask(index);
+    }
+});
 
 
 
@@ -170,9 +194,9 @@ function displayProjects() {
     return { printProjects, addProj, clearInput, removeProject };
   }
 
-const displayProjectsObj = Object.create(displayProjects());
+//Prints the project when the page loads
+const displayProjectsObj = displayProjects();
 displayProjectsObj.printProjects();
-
 
 //Event listener for adding projects
 const projectForm = document.getElementById('project-form');
@@ -190,7 +214,6 @@ projectForm.addEventListener('submit', function (e) {
 //Event Listener for deleting projects
 const projectListContainer = document.querySelector('.projects-list');
 projectListContainer.addEventListener('click', function (e) {
-    const getProjects = Object.create(createProjectTabs());
     if (e.target.classList.contains('delete-icon')) {
         const index = e.target.getAttribute('data-index');
         displayProjectsObj.removeProject(index);
