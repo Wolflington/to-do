@@ -1,6 +1,7 @@
 import { storeTasks, createToDo } from './tasks';
 import { createProject, createProjectTabs } from './projects';
 import Delete from '../assets/icons8-trash-can.svg';
+import { format } from 'date-fns';
 
 //START OF TO-DOS
 
@@ -41,7 +42,8 @@ export function displayToDo() {
             deleteIcon.setAttribute('data-index', index);
 
             const taskDueDate = document.createElement('p');
-            taskDueDate.textContent = task.dueDate;
+            const result = format(new Date(task.dueDate), 'MM/dd/yyyy');
+            taskDueDate.textContent = result;
             tasksItem.appendChild(taskDueDate);
             dateAndPriorityDiv.appendChild(taskDueDate);
 
