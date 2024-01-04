@@ -1,7 +1,7 @@
-import { storeTasks, createToDo } from './tasks';
+import { toDoProperties, createToDo } from './tasks';
 import { createProject, createProjectTabs } from './projects';
 import Delete from '../assets/icons8-trash-can.svg';
-import { format } from 'date-fns';
+import { format, compareAsc } from 'date-fns';
 
 //START OF TO-DOS
 
@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 
 export function displayToDo() {
     const getToDoFunction = createToDo();
-    const getList = getToDoFunction.getToDo();
+    let getList = getToDoFunction.getToDo();
     let tasksList = document.querySelector('.tasks-list');
 
     //Factory function to print the properties on the page
@@ -37,18 +37,26 @@ export function displayToDo() {
             const dateAndPriorityDiv = document.createElement('div');
             dateAndPriorityDiv.classList.add('date-priority-div');
             const deleteIcon = new Image();
-            deleteIcon.src = Delete;
             deleteIcon.classList.add('delete-icon');
             deleteIcon.setAttribute('data-index', index);
+            deleteIcon.src = Delete;
 
             const taskDueDate = document.createElement('p');
-            const result = format(new Date(task.dueDate), 'MM/dd/yyyy');
-            taskDueDate.textContent = result;
+            const dateFormat = format(new Date(task.dueDate), 'MM/dd/yyyy');
+            taskDueDate.textContent = dateFormat;
             tasksItem.appendChild(taskDueDate);
             dateAndPriorityDiv.appendChild(taskDueDate);
 
-            const taskPriority = document.createElement('p');
-            taskPriority.textContent = task.priority;
+            const taskPriority = document.createElement('div');
+            taskPriority.classList.add('task-priority');
+            if (task.priority === 'High') {
+                taskPriority.style.backgroundColor = '#E02020';
+            } else if (task.priority === 'medium') {
+                taskPriority.style.backgroundColor = '#EC801A';
+            } else if (task.priority === 'low') {
+                taskPriority.style.backgroundColor = '#FFF300';
+            }
+            
             tasksItem.appendChild(taskPriority);
             dateAndPriorityDiv.appendChild(taskPriority);
 
@@ -67,6 +75,7 @@ export function displayToDo() {
     const addTasks = (task) => {
         getList.push(task);
         localStorage.setItem('tasks', JSON.stringify(getList));
+        console.log(getList);
     }
 
     //Clear input after submitting the form
@@ -81,17 +90,11 @@ export function displayToDo() {
         getList.splice(index, 1);
         localStorage.setItem('tasks', JSON.stringify(getList));
         printTasks();
+        console.log(getList);
     }
 
     return { printTasks, addTasks, clearInput, removeTask };
 }
-
-//Event listener for adding tasks once the form is submitted
-const tasksForm = document.getElementById('tasks-form');
-tasksForm.addEventListener('submit', function(e) {
-    e.preventDefault(); //Ensures that the default action of the form will not execute
-    storeTasks();
-});
 
 //Prints the to do tasks when the page loads
 const getDisplayToDo = displayToDo();
@@ -134,6 +137,29 @@ projectsBtn.addEventListener('click', openProjectModal);
 closeProjBtn.addEventListener('click', closeProjectModal);
 submitProjBtn.addEventListener('click', closeProjectModal);
 
+//Event listener for adding tasks once the form is submitted
+const tasksForm = document.getElementById('tasks-form');
+tasksForm.addEventListener('submit', function(e) {
+    e.preventDefault(); //Ensures that the default action of the form will not execute
+        //GET the value received from the form
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const dueDate = document.getElementById('due-date').value;
+        const priority = document.getElementById('priority').value;
+        const projectTitle = document.getElementById('project-title').value;
+    
+        //Create new toDoProperties instance (similar to creating a new constructor)
+        const task = toDoProperties(title, description, dueDate, priority);
+    
+        // //Add project title and tasks in localStorage 'toDoList'
+        // createProjectTabsObj.addTaskToProj(projectTitle, task)
+    
+        //Push the new instance into addTasks
+        getDisplayToDo.addTasks(task);
+        getDisplayToDo.printTasks();
+        getDisplayToDo.clearInput();
+});
+
 //Event listener for deleting tasks
 const tasksListContainer = document.querySelector('.tasks-list');
 tasksListContainer.addEventListener('click', function (e) {
@@ -172,7 +198,6 @@ function displayProjects() {
         deleteIcon.src = Delete;
   
         // Append to project lists
-        const projectsList = document.querySelector('.projects-list');
         projectsList.append(projects);
         projects.append(deleteIcon);
       });
@@ -191,7 +216,8 @@ function displayProjects() {
     const removeProject = (index) => {
         getProjList.splice(index, 1);
         localStorage.setItem('toDoList', JSON.stringify(getProjList));
-        printProjects(); // Update the DOM after removal
+        printProjects();
+        console.log(getProjList);
       };
   
     return { printProjects, addProj, clearInput, removeProject };
