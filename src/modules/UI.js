@@ -1,5 +1,5 @@
 import { storeTasks, createToDo } from './tasks';
-import { projectProperties, createProjectTabs } from './projects';
+import { createProject, createProjectTabs } from './projects';
 import Delete from '../assets/icons8-trash-can.svg';
 
 //START OF TO-DOS
@@ -38,6 +38,7 @@ export function displayToDo() {
             const deleteIcon = new Image();
             deleteIcon.src = Delete;
             deleteIcon.classList.add('delete-icon');
+            deleteIcon.setAttribute('data-index', index);
 
             const taskDueDate = document.createElement('p');
             taskDueDate.textContent = task.dueDate;
@@ -76,7 +77,7 @@ export function displayToDo() {
 
     const removeTask = (index) => {
         getList.splice(index, 1);
-        localStorage.setItem('toDoList', JSON.stringify(getList));
+        localStorage.setItem('tasks', JSON.stringify(getList));
         printTasks();
     }
 
@@ -201,11 +202,10 @@ displayProjectsObj.printProjects();
 //Event listener for adding projects
 const projectForm = document.getElementById('project-form');
 projectForm.addEventListener('submit', function (e) {
-    const getProjects = Object.create(createProjectTabs());
     e.preventDefault();
     const projectTitle = document.getElementById('project-title').value;
 
-    const project = projectProperties(projectTitle);
+    const project = createProject(projectTitle);
     displayProjectsObj.addProj(project);
     displayProjectsObj.printProjects();
     displayProjectsObj.clearInput();
@@ -297,7 +297,7 @@ export function changeTabContent() {
 export function allTasksContent() {
     const tasksList = document.querySelector('.tasks-list');
     const tabName = document.querySelector('.tab-name');
-    tabName.textContent = 'Inbox';
+    tabName.textContent = 'All Tasks';
     // tasksList.textContent = 'I am from all tasks function!';
 }
 
