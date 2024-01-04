@@ -20,6 +20,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "date-fns": "^3.0.6",
     "lodash": "^4.17.21"
   }
 }
