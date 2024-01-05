@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lato&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2e13bd9ff9.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>To Do It!</header>
@@ -42,11 +43,11 @@
 
         <section class = 'project-preview'>
             <h1 class = 'tab-name'>[Tab Name]</h1>
+            <div class = 'tasks-list'></div>
             <button class = "add-task-btn">
                 <span>+</span>
                 Add Task
             </button>
-            <div class = 'tasks-list'></div>
         </section>
 
     </main>
@@ -64,7 +65,7 @@
             <input type = 'text' id = 'description' placeholder = 'Additional details'>
     
             <label for = 'due-date'>Due</label>
-            <input type = 'date' id = 'due-date' required>
+            <input type = 'date' id = 'due-date' pattern="\d{4}-\d{2}-\d{2}" required>
     
             <label for = 'priority'>Priority</label>
             <select id = 'priority' name = 'priority'>
